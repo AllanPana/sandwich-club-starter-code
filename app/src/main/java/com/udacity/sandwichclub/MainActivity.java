@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
                 launchDetailActivity(position);
             }
         });
+
+
     }
 
     private void launchDetailActivity(int position) {
