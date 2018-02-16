@@ -18,7 +18,7 @@ public class JsonUtils {
             JSONObject jsonObject = new JSONObject(json);
 
             //Get the name of the sandwich (mainName and alsoKnownAs)
-            JSONObject jsonObjectName  = jsonObject.getJSONObject("name");
+            JSONObject jsonObjectName = jsonObject.getJSONObject("name");
             String mainName = jsonObjectName.getString("mainName");
             JSONArray jsonArrayAlsoKnownAs = jsonObjectName.getJSONArray("alsoKnownAs");
             List<String> listAKA = getList(jsonArrayAlsoKnownAs);
@@ -45,9 +45,9 @@ public class JsonUtils {
      * @param jsonArray
      * @return list of String
      */
-    private static List<String> getList(JSONArray jsonArray){
+    private static List<String> getList(JSONArray jsonArray) {
         List<String> stringList = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++){
+        for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 stringList.add(jsonArray.getString(i));
             } catch (JSONException e) {
@@ -55,6 +55,21 @@ public class JsonUtils {
             }
         }
         return stringList;
+    }
+
+    /**
+     * This helper method is used to remove the brackets in the List
+     *
+     * @param list
+     * @return
+     */
+    public static String getFormattedString(List<String> list) {
+        if (list.size() == 0) {
+            return "Not applicable";
+        } else {
+            return list.toString().replace("[", "")
+                    .replace("]", "");
+        }
     }
 
 

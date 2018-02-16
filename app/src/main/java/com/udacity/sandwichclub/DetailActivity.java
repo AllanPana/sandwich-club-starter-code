@@ -66,9 +66,9 @@ public class DetailActivity extends AppCompatActivity {
         TextView tvIngredients  = findViewById(R.id.tv_ingredients);
 
         tvMainName.setText(sandwich.getMainName());
-        tvAlsoKnownAs.setText(sandwich.getAlsoKnownAs().toString());
+        tvAlsoKnownAs.setText(JsonUtils.getFormattedString(sandwich.getAlsoKnownAs()));
         tvDescription.setText(sandwich.getDescription());
-        tvIngredients.setText(sandwich.getDescription() + sandwich.getDescription()+sandwich.getDescription() +sandwich.getDescription());
+        tvIngredients.setText(JsonUtils.getFormattedString(sandwich.getIngredients()));
 
     }
 }
