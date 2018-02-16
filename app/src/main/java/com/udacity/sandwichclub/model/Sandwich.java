@@ -43,6 +43,9 @@ public class Sandwich {
     }
 
     public String getPlaceOfOrigin() {
+        if (placeOfOrigin == "" || placeOfOrigin.length() == 0){
+            placeOfOrigin = "Not applicable";
+        }
         return placeOfOrigin;
     }
 

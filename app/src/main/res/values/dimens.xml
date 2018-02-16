@@ -2,4 +2,17 @@
 <resources>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--activity_detail-->
+    <dimen name="tv_zero_horizontal_bias">0</dimen>
+    <dimen name="tv_standard_margin">16dp</dimen>
+    <dimen name="left_gude_line">16dp</dimen>
+    <dimen name="center_guide_line">130dp</dimen>
+    <dimen name="image_view_height">200dp</dimen>
+    <dimen name="detail_include__width">0dp</dimen>
+    <dimen name="detail_include__height">0dp</dimen>
+    <dimen name="detail_include_margin_bottom">16dp</dimen>
+
+
+
 </resources>

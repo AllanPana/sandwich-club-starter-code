@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
 
         String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         String json = sandwiches[position];
+        /*Log.e("allan", json);*/
         Sandwich sandwich = JsonUtils.parseSandwichJson(json);
         if (sandwich == null) {
             // Sandwich data unavailable
@@ -50,7 +52,22 @@ public class DetailActivity extends AppCompatActivity {
                 .load(sandwich.getImage())
                 .into(ingredientsIv);
 
+        //ActionBar, set the title and the back arrow button function
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         setTitle(sandwich.getMainName());
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void closeOnError() {
@@ -61,11 +78,13 @@ public class DetailActivity extends AppCompatActivity {
     private void populateUI(Sandwich sandwich) {
 
         TextView tvMainName = findViewById(R.id.tv_main_name);
+        TextView tvPlaceOfOrigin = findViewById(R.id.tv_place_of_origin);
         TextView tvAlsoKnownAs = findViewById(R.id.tv_also_known_as);
         TextView tvDescription = findViewById(R.id.tv_description);
-        TextView tvIngredients  = findViewById(R.id.tv_ingredients);
+        TextView tvIngredients = findViewById(R.id.tv_ingredients);
 
         tvMainName.setText(sandwich.getMainName());
+        tvPlaceOfOrigin.setText(sandwich.getPlaceOfOrigin());
         tvAlsoKnownAs.setText(JsonUtils.getFormattedString(sandwich.getAlsoKnownAs()));
         tvDescription.setText(sandwich.getDescription());
         tvIngredients.setText(JsonUtils.getFormattedString(sandwich.getIngredients()));

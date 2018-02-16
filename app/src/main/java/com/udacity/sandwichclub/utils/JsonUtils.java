@@ -11,6 +11,16 @@ import java.util.List;
 
 public class JsonUtils {
 
+    //constant use in json elements
+    private static final String NOT_APPLICABLE = "Not applicable";
+    private static final String NAME = "name";
+    private static final String MAIN_NAME = "mainName";
+    private static final String ALSO_KNOWN_AS = "alsoKnownAs";
+    private static final String PLACE_OF_ORIGIN = "placeOfOrigin";
+    private static final String DESCRIPTION = "description";
+    private static final String IMAGE = "image";
+    private static final String INGERDIENTS = "ingredients";
+
     public static Sandwich parseSandwichJson(String json) {
 
         try {
@@ -18,16 +28,16 @@ public class JsonUtils {
             JSONObject jsonObject = new JSONObject(json);
 
             //Get the name of the sandwich (mainName and alsoKnownAs)
-            JSONObject jsonObjectName = jsonObject.getJSONObject("name");
-            String mainName = jsonObjectName.getString("mainName");
-            JSONArray jsonArrayAlsoKnownAs = jsonObjectName.getJSONArray("alsoKnownAs");
+            JSONObject jsonObjectName = jsonObject.getJSONObject(NAME);
+            String mainName = jsonObjectName.getString(MAIN_NAME);
+            JSONArray jsonArrayAlsoKnownAs = jsonObjectName.getJSONArray(ALSO_KNOWN_AS);
             List<String> listAKA = getList(jsonArrayAlsoKnownAs);
 
 
-            String placeOfOrigin = jsonObject.getString("placeOfOrigin");
-            String description = jsonObject.getString("description");
-            String image = jsonObject.getString("image");
-            JSONArray jsonArrayIngredients = jsonObject.getJSONArray("ingredients");
+            String placeOfOrigin = jsonObject.getString(PLACE_OF_ORIGIN);
+            String description = jsonObject.getString(DESCRIPTION);
+            String image = jsonObject.getString(IMAGE);
+            JSONArray jsonArrayIngredients = jsonObject.getJSONArray(INGERDIENTS);
             List<String> ingredients = getList(jsonArrayIngredients);
 
             return new Sandwich(mainName, listAKA, placeOfOrigin, description, image, ingredients);
@@ -58,14 +68,14 @@ public class JsonUtils {
     }
 
     /**
-     * This helper method is used to remove the brackets in the List
+     * This helper method is used to convert list to string and remove the brackets in the List
      *
      * @param list
      * @return
      */
     public static String getFormattedString(List<String> list) {
         if (list.size() == 0) {
-            return "Not applicable";
+            return NOT_APPLICABLE;
         } else {
             return list.toString().replace("[", "")
                     .replace("]", "");
