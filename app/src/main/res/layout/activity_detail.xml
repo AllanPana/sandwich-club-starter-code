@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.udacity.sandwichclub.DetailActivity">
 
@@ -14,7 +18,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/sandwich_picture_content_description"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/inculde"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="@dimen/tv_zero_horizontal_bias"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,9 +38,10 @@
         app:layout_constraintTop_toBottomOf="@+id/image_iv" />
 
     <include
+        android:id="@+id/inculde"
         layout="@layout/activity_detail_include"
         android:layout_width="@dimen/detail_include__width"
-        android:layout_height="@dimen/detail_include__width"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/detail_include_margin_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,3 +50,4 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_main_name" />
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
