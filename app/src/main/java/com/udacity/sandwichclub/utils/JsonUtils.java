@@ -29,14 +29,14 @@ public class JsonUtils {
 
             //Get the name of the sandwich (mainName and alsoKnownAs)
             JSONObject jsonObjectName = jsonObject.getJSONObject(NAME);
-            String mainName = jsonObjectName.getString(MAIN_NAME);
+            String mainName = jsonObjectName.optString(MAIN_NAME, NOT_APPLICABLE);
             JSONArray jsonArrayAlsoKnownAs = jsonObjectName.getJSONArray(ALSO_KNOWN_AS);
             List<String> listAKA = getList(jsonArrayAlsoKnownAs);
 
 
-            String placeOfOrigin = jsonObject.getString(PLACE_OF_ORIGIN);
-            String description = jsonObject.getString(DESCRIPTION);
-            String image = jsonObject.getString(IMAGE);
+            String placeOfOrigin = jsonObject.optString(PLACE_OF_ORIGIN, NOT_APPLICABLE);
+            String description = jsonObject.optString(DESCRIPTION, NOT_APPLICABLE);
+            String image = jsonObject.optString(IMAGE, NOT_APPLICABLE);
             JSONArray jsonArrayIngredients = jsonObject.getJSONArray(INGERDIENTS);
             List<String> ingredients = getList(jsonArrayIngredients);
 
