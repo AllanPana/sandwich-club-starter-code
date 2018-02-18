@@ -3,7 +3,6 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,17 +12,35 @@ import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class DetailActivity extends AppCompatActivity {
 
+    private Unbinder unbinder;
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    @BindView(R.id.image_iv)
+    ImageView ingredientsIv;
+    @BindView(R.id.tv_main_name)
+    TextView tvMainName;
+    @BindView(R.id.tv_place_of_origin)
+    TextView tvPlaceOfOrigin;
+    @BindView(R.id.tv_also_known_as)
+    TextView tvAlsoKnownAs;
+    @BindView(R.id.tv_description)
+    TextView tvDescription;
+    @BindView(R.id.tv_ingredients)
+    TextView tvIngredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        //bind the views
+        unbinder = ButterKnife.bind(this);
 
-        ImageView ingredientsIv = findViewById(R.id.image_iv);
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -70,24 +87,23 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //unbind the views
+        unbinder.unbind();
+    }
+
     private void closeOnError() {
         finish();
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
     private void populateUI(Sandwich sandwich) {
-
-        TextView tvMainName = findViewById(R.id.tv_main_name);
-        TextView tvPlaceOfOrigin = findViewById(R.id.tv_place_of_origin);
-        TextView tvAlsoKnownAs = findViewById(R.id.tv_also_known_as);
-        TextView tvDescription = findViewById(R.id.tv_description);
-        TextView tvIngredients = findViewById(R.id.tv_ingredients);
-
         tvMainName.setText(sandwich.getMainName());
         tvPlaceOfOrigin.setText(sandwich.getPlaceOfOrigin());
         tvAlsoKnownAs.setText(JsonUtils.getFormattedString(sandwich.getAlsoKnownAs()));
         tvDescription.setText(sandwich.getDescription());
         tvIngredients.setText(JsonUtils.getFormattedString(sandwich.getIngredients()));
-
     }
 }
